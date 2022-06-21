@@ -7,7 +7,7 @@ export const BrandBar = observer(() => {
     const {device} = useContext(Context)
 
     return (
-        <Row className="d-flex">
+        <div className="d-flex">
             {device.brands.map(brand =>
                 <Card
                     style={{cursor:'pointer'}}
@@ -19,6 +19,7 @@ export const BrandBar = observer(() => {
                     {brand.name}
                 </Card>
             )}
-        </Row>
+        </div>
     );
 });
+
