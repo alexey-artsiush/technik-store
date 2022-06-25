@@ -17,7 +17,6 @@ export const Auth = observer (() => {
 
   const click = async () => {
     try {
-
       let data
       if(isLogin) {
         data = await login(email, password)
