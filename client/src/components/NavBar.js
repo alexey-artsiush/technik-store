@@ -9,6 +9,7 @@ import {observer} from "mobx-react-lite";
 import Container from "react-bootstrap/Container";
 import {useHistory} from 'react-router-dom'
 export const NavBar = observer(() => {
+    
     const {user} = useContext(Context)
     const history = useHistory()
 
