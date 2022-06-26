@@ -5,7 +5,6 @@ import { DEVICE_ROUTE } from '../utils/consts'
 
 export const DeviceItem = ({device}) => {
     const history = useHistory()
-
   return (
     <Col md={3} className={"mt-3"} onClick={()=> history.push(DEVICE_ROUTE + '/' + device.id)}>
         <Card style={{width: 150, cursor: 'pointer'}} border={'light'}>
