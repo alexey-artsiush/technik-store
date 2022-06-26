@@ -12,15 +12,15 @@ export const NavBar = observer(() => {
     const {user} = useContext(Context)
     const history = useHistory()
 
-    const logOut = () => {
+    const logOut = () => { 
         user.setUser({})
         user.setIsAuth(false)
-    }
+    } 
 
     return (
         <Navbar bg="dark" variant="dark">
             <Container>
-                <NavLink style={{color:'white'}} to={SHOP_ROUTE}>КупиДевайс</NavLink>
+                <NavLink style={{color:'white'}} to={SHOP_ROUTE}>Device Store</NavLink>
                 {user.isAuth ?
                     <Nav className="ml-auto" style={{color: 'white'}}>
                          <Button

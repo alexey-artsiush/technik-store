@@ -4,10 +4,12 @@ import bigStar from '../assets/bigStar.png'
 import {NavLink, useParams} from 'react-router-dom'
 import {fetchOneDevice} from "../http/deviceAPI";
 import { Context } from '..';
-import { SHOP_ROUTE, BASKET_ROUTE } from '../utils/consts';
+import { SHOP_ROUTE, BASKET_ROUTE, LOGIN_ROUTE } from '../utils/consts';
 
 export const DevicePage = () => {
+    const {user} = useContext(Context)
     const [smShow, setSmShow] = useState(false);
+    const [authShow, setAuthShow] = useState(false);
     const [device, setDevice] = useState({info: []})
     const {id} = useParams()
     const {basket} = useContext(Context)
@@ -16,8 +18,13 @@ export const DevicePage = () => {
     }, [])
 
     const click = () => {
-        basket.setDevice(device)
-        setSmShow(true)
+        if(user.isAuth == true) {
+            basket.setDevice(device)
+            setSmShow(true)
+        }
+        else if(user.isAuth == false) {
+            setAuthShow(true)
+        }
     }
     
 
@@ -45,20 +52,7 @@ export const DevicePage = () => {
                     >
                         <h3>От: {device.price} руб.</h3>
                         <Button variant={"outline-dark"} onClick={()=>click()}>Добавить в корзину</Button>
-                        <Modal
-                            size="m"
-                            show={smShow}
-                            onHide={() => setSmShow(false)}
-                            aria-labelledby="example-modal-sizes-title-sm"
-                         >
-                        <Modal.Header closeButton>
-                                Товар добавлен в корзину!
-                        </Modal.Header>
-                        <Modal.Body className='d-flex justify-content-center'>
-                            <Button className='m-2' variant={'secondary'}><NavLink className="text-white" to={BASKET_ROUTE}>В корзину</NavLink></Button>
-                            <Button className='m-2' variant={'secondary'}><NavLink className="text-white" to={SHOP_ROUTE}>Продолжить покупки</NavLink></Button>
-                        </Modal.Body>
-                        </Modal>
+
                     </Card>
                 </Col>
             </Row>
@@ -70,7 +64,35 @@ export const DevicePage = () => {
                     </Row>
                 )}
             </Row>
+
+            <Modal
+                size="m"
+                show={smShow}
+                onHide={() => setSmShow(false)}
+                aria-labelledby="example-modal-sizes-title-sm"
+            >
+                <Modal.Header closeButton>Товар добавлен в корзину!</Modal.Header>
+                <Modal.Body className='d-flex justify-content-center'>
+                    <Button className='m-2' variant={'secondary'}><NavLink className="text-white" to={BASKET_ROUTE}>В корзину</NavLink></Button>
+                    <Button className='m-2' variant={'secondary'}><NavLink className="text-white" to={SHOP_ROUTE}>Продолжить покупки</NavLink></Button>
+                </Modal.Body>
+            </Modal>
+
+            <Modal
+                size="m"
+                show={authShow}
+                onHide={() => setAuthShow(false)}
+                aria-labelledby="example-modal-sizes-title-sm"
+            >
+                <Modal.Header closeButton>Для оформления заказа необходимо авторизироваться!</Modal.Header>
+                <Modal.Body className='d-flex justify-content-center'>
+                    <Button className='m-2' variant={'secondary'}><NavLink className="text-white" to={LOGIN_ROUTE}>Авторизироваться</NavLink></Button>
+                </Modal.Body>
+            </Modal>
+
         </Container>
+
+        
     );
 };
 

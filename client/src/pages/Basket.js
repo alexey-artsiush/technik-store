@@ -9,7 +9,6 @@ export const Basket = observer (() => {
 
   return (
     <div>
-
       {basket.basket.length > 0 ? 
       <div>
         <div className="d-flex justify-content-around">
@@ -36,8 +35,6 @@ export const Basket = observer (() => {
       :
       <p className='text-center mt-5'>Корзина пуста</p>
       }
-      
-      
     </div>
   )
 })
